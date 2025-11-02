@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: purple;
+  --color-secondary: teal;
+}
+
+.btn-primary {
+  @apply bg-linear-to-l from-[#632EE3] to-[#9F62F2] text-white rounded-md;
+}

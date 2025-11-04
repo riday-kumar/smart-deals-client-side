@@ -6,15 +6,35 @@ const MyBids = () => {
   const { user } = use(AuthContext);
   const [bids, setBids] = useState([]);
 
+  // console.log(user.accessToken);
+
+  // using jwt token
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/bids?email=${user.email}`)
+      fetch(`http://localhost:5000/bids?email=${user.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setBids(data);
         });
     }
-  }, [user?.email]);
+  }, [user]);
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/bids?email=${user.email}`, {
+  //       headers: {
+  //         authorization: `Bearer ${user.accessToken}`,
+  //       },
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setBids(data);
+  //       });
+  //   }
+  // }, [user]);
 
   const handleDeleteBid = (id) => {
     Swal.fire({
@@ -84,12 +104,12 @@ const MyBids = () => {
           <tbody>
             {/* row 1 */}
             {bids.map((bid, index) => (
-              <tr>
+              <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
+                      <div className="mask h-12 w-12">
                         <img src={bid.buyer_image} alt="Avatar" />
                       </div>
                     </div>

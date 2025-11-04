@@ -14,13 +14,17 @@ const ProductDetails = () => {
   const { _id: productId } = singleProduct;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/bids/${productId}`)
+    fetch(`http://localhost:5000/products/bids/${productId}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setBids(data);
       });
-  }, [productId]);
+  }, [productId, user]);
 
   const handlePopUp = () => {
     popUpRef.current.showModal();
@@ -156,7 +160,7 @@ const ProductDetails = () => {
             <tbody>
               {/* row 1 */}
               {bids.map((bid, index) => (
-                <tr>
+                <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
                     <div className="flex items-center gap-3">

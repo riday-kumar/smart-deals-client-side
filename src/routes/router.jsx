@@ -7,6 +7,7 @@ import MyProducts from "../components/MyProducts/MyProducts";
 import MyBids from "../components/MyBids/MyBids";
 import { PrivateRoute } from "./PrivateRoute";
 import ProductDetails from "../components/ProductDetails/ProductDetails";
+import CreateAProduct from "../components/CreateAProduct/CreateAProduct";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/create-product",
+        element: (
+          <PrivateRoute>
+            <CreateAProduct></CreateAProduct>
           </PrivateRoute>
         ),
       },

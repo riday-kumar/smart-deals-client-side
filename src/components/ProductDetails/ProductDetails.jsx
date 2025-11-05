@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import ProductCard from "../ProductCard/ProductCard";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const ProductDetails = () => {
   const singleProduct = useLoaderData();
@@ -14,17 +15,30 @@ const ProductDetails = () => {
   const { _id: productId } = singleProduct;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/bids/${productId}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
-      .then((res) => res.json())
+    axios
+      .get(`http://localhost:5000/products/bids/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      })
       .then((data) => {
-        console.log(data);
-        setBids(data);
+        console.log("after axios get", data);
+        setBids(data.data);
       });
-  }, [productId, user]);
+  }, [productId, user.accessToken]);
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/products/bids/${productId}`, {
+  //     headers: {
+  //       authorization: `Bearer ${user.accessToken}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setBids(data);
+  //     });
+  // }, [productId, user]);
 
   const handlePopUp = () => {
     popUpRef.current.showModal();

@@ -36,7 +36,7 @@ const CreateAProduct = () => {
       seller_name,
     };
 
-    // fetch("http://localhost:5000/products", {
+    // fetch("https://smart-deals-api-server-two.vercel.app/products", {
     //   method: "post",
     //   headers: {
     //     "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const CreateAProduct = () => {
     //   });
 
     // using axios directly without instance
-    // axios.post("http://localhost:5000/products", newProduct).then((data) => {
+    // axios.post("https://smart-deals-api-server-two.vercel.app/products", newProduct).then((data) => {
     //   if (data.data.insertedId) {
     //     e.target.reset();
     //     popUpRef.current.close();
@@ -63,7 +63,7 @@ const CreateAProduct = () => {
     // });
 
     // using Axios Instance
-    // instance.post("http://localhost:5000/products", newProduct).then((data) => {
+    // instance.post("https://smart-deals-api-server-two.vercel.app/products", newProduct).then((data) => {
     //   if (data.data.insertedId) {
     //     e.target.reset();
     //     popUpRef.current.close();
@@ -78,7 +78,10 @@ const CreateAProduct = () => {
 
     // using Axios Secure Instance for passing Token
     axiosSecureInstance
-      .post("http://localhost:5000/products", newProduct)
+      .post(
+        "https://smart-deals-api-server-two.vercel.app/products",
+        newProduct
+      )
       .then((data) => {
         if (data.data.insertedId) {
           e.target.reset();
